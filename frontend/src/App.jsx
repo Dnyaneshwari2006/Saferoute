@@ -9,6 +9,8 @@ import HeatmapToggle from './components/HeatmapToggle'
 import Community from './components/Community'
 import SafetyTimer from './components/SafetyTimer'
 
+const BASE_URL = "https://saferoute-vg8x.onrender.com";
+
 const TABS = [
   { id: 'route',     label: '🗺 Route'      },
   { id: 'results',   label: '📍 Results'    },
@@ -43,7 +45,7 @@ export default function App() {
   const [timeMode, setTimeMode] = useState(autoTimeMode)
 
   useEffect(() => {
-    fetch('/api/crime-hotspots')
+      fetch(`${BASE_URL}/api/crime-hotspots`)
       .then(r => r.json())
       .then(data => setCrimeHotspots(data.hotspots || []))
       .catch(() => {})
@@ -59,7 +61,7 @@ export default function App() {
     setRoutes(null)
 
     try {
-      const resp = await fetch('/api/route', {
+      const resp = await fetch(`${BASE_URL}/api/route`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

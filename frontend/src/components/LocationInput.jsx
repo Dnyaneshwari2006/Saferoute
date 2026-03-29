@@ -22,8 +22,8 @@ export default function LocationInput({ label, placeholder, icon, onSelect }) {
     setLoading(true)
     const timer = setTimeout(async () => {
       try {
-        const res = await fetch(`/api/geocode?q=${encodeURIComponent(query)}`)
-        const data = await res.json()
+       const res = await fetch(`https://saferoute-vg8x.onrender.com/api/geocode?q=${encodeURIComponent(query)}`)     
+       const data = await res.json()
         if (Array.isArray(data)) {
           setSuggestions(data)
           setOpen(true)
