@@ -390,9 +390,15 @@ def crime_hotspots():
 
 
 if __name__ == "__main__":
+    import os
+
+    port = int(os.environ.get("PORT", 5000))
+
     if not GOOGLE_PLACES_KEY:
-        print("⚠️  WARNING: GOOGLE_PLACES_API_KEY not set in .env — geocoding won't work!")
+        print("⚠️  WARNING: GOOGLE_PLACES_API_KEY not set — geocoding won't work!")
     else:
         print(f"✅ Google Places API key loaded (ends ...{GOOGLE_PLACES_KEY[-4:]})")
+
     print(f"🛡️  Rate limit: {DAILY_LIMIT} geocode requests/IP/day")
-    app.run(debug=True, port=5000)
+
+    app.run(host="0.0.0.0", port=port)
